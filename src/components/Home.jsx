@@ -9,7 +9,7 @@ export default function Home() {
      <section
       id="home"
       style={{ backgroundColor: 'var(--deep-space)' }}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden px-8 md:px-20 py-32 lg:py-0"
+      className="relative min-h-screen flex flex-col lg:flex-row items-center justify-center overflow-hidden px-8 md:px-20 py-32 lg:py-0"
     >
       {/* Radar sweep — positioned center, behind both content and photo */}
       <RadarSweep />
@@ -22,9 +22,6 @@ export default function Home() {
           backgroundRepeat: 'repeat',
         }}
       />
-
-      {/* Shared container caps the whole layout's width on widescreen */}
-      <div className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row items-center gap-12 lg:gap-8"></div>
 
       {/* Left — text content */}
       <div className="max-w-2xl lg:w-1/2 flex-shrink-0 mx-auto lg:mx-0">
