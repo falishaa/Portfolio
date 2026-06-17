@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --deep-space: #080B14;
+  --signal-rose: #E8547A;
+  --saffron-pulse: #F4A623;
+  --lunar-white: #F0EEF5;
+  --cipher-teal: #2DFFD4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--deep-space);
+  color: var(--lunar-white);
+  font-family: 'Space Grotesk', sans-serif;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  position: relative;
+}
+
+.font-display {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-mono-accent {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+html {
+  background-color: #080B14;
+}
