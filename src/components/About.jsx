@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import militaryPhoto from '../assets/Torch1.jpg'
-import fashionPhoto from '../assets/blkdress3.jpg'
+import militaryPhoto from '../assets/Torch1.JPG'
+import fashionPhoto from '../assets/blkdress3.JPG'
 
 const FACTS = [
   { label: 'Branch', value: 'United States Space Force' },
