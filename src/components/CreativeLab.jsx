@@ -238,7 +238,7 @@ export default function CreativeLab() {
                                 className="w-full max-h-[75vh] rounded-lg object-contain"
                             >
                                 <source
-                                    src="/Videos/pihole-tutorial.mp4"
+                                    src={`${import.meta.env.BASE_URL}Videos/pihole-tutorial.mp4`}
                                     type="video/mp4"
                                 />
                                 Your browser does not support video playback.
