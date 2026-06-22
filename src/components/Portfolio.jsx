@@ -10,7 +10,7 @@ const photoModules = import.meta.glob(
 )
 
 const PHOTOS = Object.entries(photoModules).map(([path, module], i) => {
-  // path looks like: ../assets/portfolio/editorial/photo1.jpg
+  // path should be ../assets/portfolio/editorial/photo1.jpg
   const parts = path.split('/')
   const folderName = parts[parts.length - 2] // e.g. "editorial"
   const fileName = parts[parts.length - 1].split('.')[0] // e.g. "photo1"
@@ -148,7 +148,7 @@ export default function Portfolio() {
                 className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
-              {/* Hover overlay */}
+              {/* Hover overlay desktop only */}
               <div
                 className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{ background: 'linear-gradient(to top, rgba(8,11,20,0.85), transparent)' }}

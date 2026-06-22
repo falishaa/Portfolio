@@ -16,7 +16,7 @@ export default function About() {
       className="relative min-h-screen flex items-center px-8 md:px-20 py-32"
       style={{ backgroundColor: 'var(--deep-space)' }}
     >
-      {/* Saffron accent line on the left edge */}
+      {/* Saffron accent line */}
       <div
         className="absolute left-0 top-0 bottom-0 w-px"
         style={{ backgroundColor: 'var(--saffron-pulse)', opacity: 0.3 }}
@@ -51,7 +51,7 @@ export default function About() {
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.3fr_1fr] gap-10 md:gap-8 items-center">
 
-          {/* Left — military photo */}
+          {/* Left military photo */}
           <motion.div
             className="relative order-2 md:order-1"
             initial={{ opacity: 0, x: -40 }}
@@ -79,7 +79,7 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Middle — text */}
+          {/* Middle about me text */}
           <motion.div
             className="order-1 md:order-2"
             initial={{ opacity: 0, y: 30 }}
@@ -149,7 +149,7 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right — fashion photo */}
+          {/* Right fashion photo */}
           <motion.div
             className="relative order-3"
             initial={{ opacity: 0, x: 40 }}

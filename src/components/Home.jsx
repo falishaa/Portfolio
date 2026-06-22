@@ -11,7 +11,7 @@ export default function Home() {
       style={{ backgroundColor: 'var(--deep-space)' }}
       className="relative min-h-screen flex flex-col lg:flex-row items-center justify-center overflow-hidden px-8 md:px-20 py-32 lg:py-0"
     >
-      {/* Radar sweep — positioned center, behind both content and photo */}
+      {/* Radar sweep */}
       <RadarSweep />
 
       {/* Bengali textile texture overlay */}
@@ -23,7 +23,7 @@ export default function Home() {
         }}
       />
 
-      {/* Left — text content */}
+      {/* Left text content */}
       <div className="max-w-2xl lg:w-1/2 flex-shrink-0 mx-auto lg:mx-0">
         {/* Mono label */}
         <motion.p
@@ -130,7 +130,7 @@ export default function Home() {
         </motion.div>
       </div>
 
-      {/* Right — photo, fades up from behind the radar */}
+      {/* Right side photo fade */}
       <motion.div
         className="relative z-10 lg:w-1/2 w-full mt-16 lg:mt-0 flex justify-center lg:justify-end"
         initial={{ opacity: 0 }}

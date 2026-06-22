@@ -111,7 +111,7 @@ export default function CreativeLab() {
                             backgroundColor: 'rgba(232, 84, 122, 0.03)',
                         }}
                     >
-                        {/* Top row — tag and status */}
+                        {/* Top row tag and status */}
                         <div className="flex items-center justify-between">
                             <span
                                 className="font-mono-accent text-xs tracking-widest"
