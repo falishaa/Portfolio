@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import useTypewriter from '../hooks/useTypewriter'
-import coverImage from '../assets/Falisha2.jpg'
+import coverImage from '../assets/Falisha2.png'
 
 export default function Home() {
   const typed = useTypewriter()
