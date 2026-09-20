@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const CATEGORIES = ['All', 'Editorial', 'Fashion', 'Fitness', 'Brand', 'Campaign']
+const PAGE_SIZE = 12
 
 // Pulls every image from each category folder automatically
 const photoModules = import.meta.glob(
@@ -10,14 +11,10 @@ const photoModules = import.meta.glob(
 )
 
 const PHOTOS = Object.entries(photoModules).map(([path, module], i) => {
-  // path should be ../assets/portfolio/editorial/photo1.jpg
   const parts = path.split('/')
-  const folderName = parts[parts.length - 2] // e.g. "editorial"
-  const fileName = parts[parts.length - 1].split('.')[0] // e.g. "photo1"
-
-  // Capitalize folder name!!
+  const folderName = parts[parts.length - 2]
+  const fileName = parts[parts.length - 1].split('.')[0]
   const category = folderName.charAt(0).toUpperCase() + folderName.slice(1)
-
   const title = fileName
     .replace(/[-_]/g, ' ')
     .replace(/\b\w/g, char => char.toUpperCase())
@@ -32,10 +29,20 @@ const PHOTOS = Object.entries(photoModules).map(([path, module], i) => {
 
 export default function Portfolio() {
   const [active, setActive] = useState('All')
+  const [visible, setVisible] = useState(PAGE_SIZE)
   const [lightbox, setLightbox] = useState(null)
   const [dragStartY, setDragStartY] = useState(null)
   const [dragY, setDragY] = useState(0)
   const isDragging = useRef(false)
+
+  const filtered = active === 'All' ? PHOTOS : PHOTOS.filter(p => p.category === active)
+  const displayed = filtered.slice(0, visible)
+  const hasMore = visible < filtered.length
+
+  const handleCategoryChange = (cat) => {
+    setActive(cat)
+    setVisible(PAGE_SIZE)
+  }
 
   const handleTouchStart = (e) => {
     isDragging.current = true
@@ -44,27 +51,17 @@ export default function Portfolio() {
 
   const handleTouchMove = (e) => {
     if (!isDragging.current) return
-
     const currentY = e.touches[0].clientY
     const diff = currentY - dragStartY
-
-    if (diff > 0) {
-      setDragY(diff)
-    }
+    if (diff > 0) setDragY(diff)
   }
 
   const handleTouchEnd = () => {
     isDragging.current = false
-
-    if (dragY > 120) {
-      setLightbox(null)
-    }
-
+    if (dragY > 120) setLightbox(null)
     setDragY(0)
     setDragStartY(null)
   }
-
-  const filtered = active === 'All' ? PHOTOS : PHOTOS.filter(p => p.category === active)
 
   return (
     <section
@@ -93,7 +90,9 @@ export default function Portfolio() {
             fontSize: 'clamp(2.5rem, 5vw, 4rem)',
           }}
         >
-          Editorials, <span style={{ color: 'var(--signal-rose)' }}>Fashion </span>, <span style={{ color: 'var(--cipher-teal)' }}>Fitness, </span> <span style={{ color: 'var(--saffron-pulse)' }}>Everything. </span>
+          Editorials, <span style={{ color: 'var(--signal-rose)' }}>Fashion </span>,{' '}
+          <span style={{ color: 'var(--cipher-teal)' }}>Fitness, </span>{' '}
+          <span style={{ color: 'var(--saffron-pulse)' }}>Everything. </span>
         </h2>
       </motion.div>
 
@@ -108,7 +107,7 @@ export default function Portfolio() {
         {CATEGORIES.map(cat => (
           <button
             key={cat}
-            onClick={() => setActive(cat)}
+            onClick={() => handleCategoryChange(cat)}
             className="font-mono-accent text-xs tracking-widest px-5 py-2 border transition-all duration-300"
             style={{
               borderColor: active === cat ? 'var(--signal-rose)' : 'rgba(240, 238, 245, 0.2)',
@@ -121,31 +120,34 @@ export default function Portfolio() {
         ))}
       </motion.div>
 
-      {/* Masonry grid */}
-      <motion.div
-        className="columns-1 sm:columns-2 lg:columns-3 gap-4"
-        layout
+      {/* Photo count indicator */}
+      <p
+        className="font-mono-accent text-xs tracking-widest mb-8"
+        style={{ color: 'var(--lunar-white)', opacity: 0.3 }}
       >
+        SHOWING {displayed.length} OF {filtered.length}
+      </p>
+
+      {/* Grid — 3 columns, uniform rows, images fill width */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <AnimatePresence>
-          {filtered.map((photo, i) => (
+          {displayed.map((photo, i) => (
             <motion.div
               key={photo.id}
-              className="relative break-inside-avoid mb-4 cursor-pointer overflow-hidden group"
+              className="relative cursor-pointer overflow-hidden group aspect-[3/4]"
               style={{ border: '1px solid rgba(232, 84, 122, 0.15)' }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
+              transition={{ duration: 0.4, delay: (i % PAGE_SIZE) * 0.04 }}
               onClick={() => {
-                if (window.innerWidth >= 768) {
-                  setLightbox(photo)
-                }
+                if (window.innerWidth >= 768) setLightbox(photo)
               }}
             >
               <img
                 src={photo.src}
                 alt={photo.title}
-                className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
               {/* Hover overlay desktop only */}
@@ -169,7 +171,36 @@ export default function Portfolio() {
             </motion.div>
           ))}
         </AnimatePresence>
-      </motion.div>
+      </div>
+
+      {/* Load more */}
+      {hasMore && (
+        <motion.div
+          className="flex justify-center mt-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+        >
+          <button
+            onClick={() => setVisible(v => v + PAGE_SIZE)}
+            className="font-mono-accent text-xs tracking-widest px-10 py-4 border transition-all duration-300"
+            style={{
+              borderColor: 'var(--signal-rose)',
+              color: 'var(--signal-rose)',
+            }}
+            onMouseEnter={e => {
+              e.target.style.backgroundColor = 'var(--signal-rose)'
+              e.target.style.color = 'var(--deep-space)'
+            }}
+            onMouseLeave={e => {
+              e.target.style.backgroundColor = 'transparent'
+              e.target.style.color = 'var(--signal-rose)'
+            }}
+          >
+            LOAD MORE // {filtered.length - visible} REMAINING
+          </button>
+        </motion.div>
+      )}
 
       {/* Lightbox */}
       <AnimatePresence>
@@ -182,11 +213,7 @@ export default function Portfolio() {
             exit={{ opacity: 0 }}
             onClick={() => setLightbox(null)}
           >
-
-            {/* fix lightbox */}
             <div className="relative w-full max-w-6xl max-h-[90vh] flex flex-col items-center pointer-events-none">
-
-              {/* Re-enable pointer events ONLY on actual content */}
               <div
                 className="pointer-events-auto w-full flex flex-col items-center"
                 onTouchStart={handleTouchStart}
@@ -197,16 +224,12 @@ export default function Portfolio() {
                   transition: isDragging.current ? 'none' : 'transform 0.2s ease',
                 }}
               >
-
                 <img
                   src={lightbox.src}
                   alt={lightbox.title}
                   className="w-full max-h-[80vh] object-contain"
                 />
-
-                <div
-                  className="mt-4 flex items-center justify-between w-full"
-                >
+                <div className="mt-4 flex items-center justify-between w-full">
                   <div>
                     <p
                       className="font-mono-accent text-xs tracking-widest"
@@ -221,7 +244,6 @@ export default function Portfolio() {
                       {lightbox.title}
                     </p>
                   </div>
-
                   <button
                     className="font-mono-accent text-xs tracking-widest px-4 py-2 border cursor-pointer"
                     style={{
@@ -233,7 +255,6 @@ export default function Portfolio() {
                     CLOSE
                   </button>
                 </div>
-
               </div>
             </div>
           </motion.div>

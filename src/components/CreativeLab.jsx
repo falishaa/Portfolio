@@ -41,8 +41,8 @@ const PROJECTS = [
 ]
 
 const STATUS_COLORS = {
-    ACTIVE: 'var(--cipher-teal)',
-    COMPLETE: 'var(--saffron-pulse)',
+    ACTIVE: 'var(--saffron-pulse)',
+    COMPLETE: 'var(--cipher-teal)',
     PENDING: 'var(--signal-rose)',
 }
 
@@ -51,7 +51,7 @@ export default function CreativeLab() {
     return (
         <section
             id="creative-lab"
-            className="relative min-h-screen px-8 md:px-20 py-32"
+            className="relative min-h-screen flex justify-center px-8 md:px-20 py-32"
             style={{ backgroundColor: 'var(--deep-space)' }}
         >
             {/* Subtle teal glow top right */}
@@ -63,6 +63,7 @@ export default function CreativeLab() {
                 }}
             />
 
+            <div className="w-full max-w-7xl">
             {/* Section header */}
             <motion.div
                 className="mb-16"
@@ -207,6 +208,7 @@ export default function CreativeLab() {
                         />
                     </motion.div>
                 ))}
+            </div>
             </div>
             <AnimatePresence>
                 {showVideo && (
