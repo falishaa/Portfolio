@@ -24,7 +24,7 @@ export default function Nav() {
 
     return (
         <nav
-            className="fixed top-0 left-0 right-0 z-50 px-8 md:px-20 py-5 flex items-center justify-between transition-all duration-500"
+            className="fixed top-0 left-0 right-0 z-50 px-8 md:px-20 py-5 md:py-8 flex items-center justify-between transition-all duration-500"
             style={{
                 backgroundColor: scrolled
                     ? 'rgba(3, 6, 14, 0.72)'
@@ -46,19 +46,19 @@ export default function Nav() {
                 className="font-display tracking-widest"
                 style={{
                     color: 'var(--lunar-white)',
-                    fontSize: '1.2rem',
+                    fontSize: 'clamp(1.2rem, 2vw, 2rem)',
                 }}
             >
                 F<span style={{ color: 'var(--signal-rose)' }}>.</span>
             </a>
 
             {/* Desktop links */}
-            <ul className="hidden md:flex items-center gap-10">
+            <ul className="hidden md:flex items-center gap-12">
                 {LINKS.map((link) => (
                     <li key={link.href}>
                         <a
                             href={link.href}
-                            className="font-mono-accent text-xs tracking-widest transition-colors duration-300"
+                            className="font-mono-accent text-sm lg:text-base tracking-widest transition-colors duration-300"
                             style={{
                                 color: 'var(--lunar-white)',
                                 opacity: 0.6,
