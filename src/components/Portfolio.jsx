@@ -81,7 +81,7 @@ export default function Portfolio() {
           className="font-mono-accent text-xs tracking-widest mb-4"
           style={{ color: 'var(--cipher-teal)' }}
         >
-          // PORTFOLIO
+        PORTFOLIO
         </p>
         <h2
           className="font-display leading-tight"
@@ -108,7 +108,7 @@ export default function Portfolio() {
           <button
             key={cat}
             onClick={() => handleCategoryChange(cat)}
-            className="font-mono-accent text-xs tracking-widest px-5 py-2 border transition-all duration-300"
+            className="font-mono-accent text-xs tracking-widest px-5 py-2 border transition-all duration-300 cursor-pointer"
             style={{
               borderColor: active === cat ? 'var(--signal-rose)' : 'rgba(240, 238, 245, 0.2)',
               color: active === cat ? 'var(--deep-space)' : 'var(--lunar-white)',

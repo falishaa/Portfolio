@@ -33,7 +33,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          // PORTFOLIO — UNCLASSIFIED
+
         </motion.p>
 
         {/* Name */}
@@ -93,7 +93,7 @@ export default function Home() {
         >
           <a
             href="#portfolio"
-            className="font-mono-accent text-xs tracking-widest px-6 py-3 border transition-all duration-300"
+            className="font-mono-accent text-xs tracking-widest px-6 py-4 border transition-all duration-300"
             style={{
               borderColor: 'var(--signal-rose)',
               color: 'var(--signal-rose)',

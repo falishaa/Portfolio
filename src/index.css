@@ -37,3 +37,7 @@ html, body {
 html {
   background-color: #080B14;
 }
+
+button {
+  cursor: pointer;
+}

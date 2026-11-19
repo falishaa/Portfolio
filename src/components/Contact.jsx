@@ -24,7 +24,7 @@ export default function Contact() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        // GET IN TOUCH
+      GET IN TOUCH
       </motion.p>
 
       <motion.h2

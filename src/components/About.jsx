@@ -36,7 +36,7 @@ export default function About() {
             className="font-mono-accent text-xs tracking-widest mb-4"
             style={{ color: 'var(--cipher-teal)' }}
           >
-            // ABOUT
+          ABOUT ME
           </p>
           <h2
             className="font-display leading-tight"

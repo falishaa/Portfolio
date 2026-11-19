@@ -76,7 +76,7 @@ export default function CreativeLab() {
                     className="font-mono-accent text-xs tracking-widest mb-4"
                     style={{ color: 'var(--cipher-teal)' }}
                 >
-          // CREATIVE LAB
+          CREATIVE LAB
                 </p>
 
                 <h2
